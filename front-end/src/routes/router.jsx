@@ -9,11 +9,11 @@ import LoginPage from '../pages/LoginPage';
 
 function Router() {
     return(
-        <BrowserRouter>
-            <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/" element={ <Navigate to="/login" /> } />
-            </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={ <Navigate to="/login" /> } />
+        </Routes>
       </BrowserRouter>
     )
 }
