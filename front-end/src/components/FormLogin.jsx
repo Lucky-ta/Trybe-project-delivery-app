@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import { useNavigate } from 'react-router-dom';
 import login from '../service/loginApi';
 
 export default function FormLogin() {
@@ -8,6 +9,8 @@ export default function FormLogin() {
   const [password, setPassword] = useState('');
   const [checkInputs, setCheckInputs] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const MINLENGTH = 6;
 
@@ -29,6 +32,8 @@ export default function FormLogin() {
     const postRequest = await login({ email, password });
     if (postRequest.message) {
       setErrorMessage(postRequest.message);
+    } else {
+      return navigate('/customer/products');
     }
     console.log(postRequest);
     setEmail('');
