@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import login from '../service/loginApi';
 
 export default function FormLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkInputs, setCheckInputs] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const MINLENGTH = 6;
 
@@ -19,10 +21,16 @@ export default function FormLogin() {
     }
   }, [email, password]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
+
+    const postRequest = await login({ email, password });
+    if (postRequest.message) {
+      setErrorMessage(postRequest.message);
+    }
+    console.log(postRequest);
     setEmail('');
     setPassword('');
     // todo
@@ -63,7 +71,9 @@ export default function FormLogin() {
           Ainda não tenho conta
         </Button>
       </Form.Group>
-
+      {errorMessage.length !== 0 && (
+        <p data-testid="common_login__element-invalid-email">{errorMessage}</p>
+      )}
     </Form>
   );
 }
