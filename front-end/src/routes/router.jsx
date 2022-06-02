@@ -8,6 +8,7 @@ import {
 import CustomerPage from '../pages/CustomerPage';
 
 import LoginPage from '../pages/LoginPage';
+import OrdersPage from '../pages/OrdersPage';
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
         <Route path="/login" element={ <LoginPage /> } />
         <Route path="/" element={ <Navigate to="/login" /> } />
         <Route path="/customer/products" element={ <CustomerPage /> } />
+        <Route path="/customer/orders" element={ <OrdersPage /> } />
       </Routes>
     </BrowserRouter>
   );
