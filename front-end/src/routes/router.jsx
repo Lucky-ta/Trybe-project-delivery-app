@@ -6,6 +6,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import CustomerPage from '../pages/CustomerPage';
+import RegisterPage from '../pages/RegisterPage';
 
 import LoginPage from '../pages/LoginPage';
 
@@ -16,6 +17,7 @@ function Router() {
         <Route path="/login" element={ <LoginPage /> } />
         <Route path="/" element={ <Navigate to="/login" /> } />
         <Route path="/customer/products" element={ <CustomerPage /> } />
+        <Route path="/register" element={ <RegisterPage /> } />
       </Routes>
     </BrowserRouter>
   );
