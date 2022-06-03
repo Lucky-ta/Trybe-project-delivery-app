@@ -7,23 +7,23 @@ export default function NavBarProducts() {
   return (
     <nav className="navbar">
       <Link
-        datatestid="customer_products__element-navbar-link-products"
+        data-testid="customer_products__element-navbar-link-products"
         to="/customer/products"
       >
         Products
 
       </Link>
       <Link
-        datatestid="customer_products__element-navbar-link-orders"
+        data-testid="customer_products__element-navbar-link-orders"
         to="/customer/orders"
       >
         Pedidos
 
       </Link>
-      <p datatestid="customer_products__element-navbar-user-full-name">
+      <p data-testid="customer_products__element-navbar-user-full-name">
         {localStorage.getItem('userName')}
       </p>
-      <Button datatestid="customer_products__element-navbar-link-logout">Logout</Button>
+      <Button data-testid="customer_products__element-navbar-link-logout">Logout</Button>
     </nav>
   );
 }

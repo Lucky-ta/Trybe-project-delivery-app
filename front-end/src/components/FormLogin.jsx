@@ -54,6 +54,8 @@ export default function FormLogin() {
           onChange={ (e) => { setEmail(e.target.value); } }
           value={ email }
         />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Senha</Form.Label>
         <Form.Control
           type="password"
