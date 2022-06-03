@@ -20,7 +20,9 @@ export default function NavBarProducts() {
         Pedidos
 
       </Link>
-      <p datatestid="customer_products__element-navbar-user-full-name">Marcelo</p>
+      <p datatestid="customer_products__element-navbar-user-full-name">
+        {localStorage.getItem('userName')}
+      </p>
       <Button datatestid="customer_products__element-navbar-link-logout">Logout</Button>
     </nav>
   );

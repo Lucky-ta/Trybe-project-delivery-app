@@ -1,5 +1,6 @@
 const md5 = require('md5');
 const { getUserByEmail } = require('./UserService');
+const { sign } = require('../utils/jwt');
 
 const authenticateUser = async (email, password) => {
   const userData = await getUserByEmail(email);
@@ -11,9 +12,10 @@ const authenticateUser = async (email, password) => {
   }
   const hashedInputedPassword = md5(password);
   if (hashedInputedPassword === userData.dataValues.password) {
- return {
-    status: 200, data: userData,
-  }; 
+    const token = sign({ userData });
+  return {
+    status: 200, data: { userData, token },
+  };
 }
   return {
     status: 401,

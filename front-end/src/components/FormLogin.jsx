@@ -33,6 +33,8 @@ export default function FormLogin() {
     if (postRequest.message) {
       setErrorMessage(postRequest.message);
     } else {
+      localStorage.setItem('token', postRequest.token);
+      localStorage.setItem('userName', postRequest.userData.name);
       return navigate('/customer/products');
     }
     console.log(postRequest);
