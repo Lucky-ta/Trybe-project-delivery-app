@@ -20,4 +20,14 @@ const userRegister = async (req, res) => {
 }
 };
 
-module.exports = { userLogin, userRegister };
+const getUserById = async (req, res) => {
+    try {
+        const { id } = req.body;
+        const result = await getUserById(id);
+        return res.status(result.status).json(result.data);
+    } catch (e) {
+        return res.status(500).json(e.message);
+    }
+  };
+
+module.exports = { userLogin, userRegister, getUserById };

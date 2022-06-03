@@ -33,6 +33,8 @@ export default function FormLogin() {
     if (postRequest.message) {
       setErrorMessage(postRequest.message);
     } else {
+      localStorage.setItem('token', postRequest.token);
+      localStorage.setItem('userName', postRequest.userData.name);
       return navigate('/customer/products');
     }
     console.log(postRequest);
@@ -52,6 +54,8 @@ export default function FormLogin() {
           onChange={ (e) => { setEmail(e.target.value); } }
           value={ email }
         />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Senha</Form.Label>
         <Form.Control
           type="password"
