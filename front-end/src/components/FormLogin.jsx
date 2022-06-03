@@ -70,8 +70,8 @@ export default function FormLogin() {
         </Button>
         <Button
           variant="primary"
-          type="submit"
           data-testid="common_login__button-register"
+          onClick={ () => navigate('/register') }
         >
           Ainda não tenho conta
         </Button>
