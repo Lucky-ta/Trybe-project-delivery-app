@@ -1,34 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // import { Button } from 'react-bootstrap';
 
 export default function ProductCard({ id, urlImage, name, price, updateCart }) {
-  const [quantity, setQuantity] = useState(0);
-  const [operation, setOperation] = useState('add');
+  const quantity = useRef(0);
 
-  const updateQuantity = (number) => {
-    if (number < quantity) setOperation('subtract');
-    setQuantity(number);
+  const updateQty = (number) => {
+    if (number < 0) {
+      quantity.current = 0;
+      return null;
+    }
+    quantity.current = (number);
+    updateCart(quantity.current);
   };
-
-  const changeQuantity = useCallback((operationParam) => {
-    let newQuantity = quantity;
-    if (operationParam === 'add') newQuantity += 1;
-    if (operationParam === 'subtract') newQuantity -= 1;
-    if (newQuantity < 0) newQuantity = 0;
-    // updateQuantity(newQuantity);
-    setQuantity(newQuantity);
-  }, [quantity]);
-
-  const handleAddToCart = (operationParam) => {
-    setOperation(operationParam);
-    changeQuantity(operationParam);
-    updateCart(operationParam, quantity, { id, name, price });
-  };
-
-  useEffect(() => {
-    updateCart(operation, quantity, { id, name, price });
-  }, [id, name, price, quantity, updateCart, operation]);
 
   // TODO: mudar o div para Link para o produto
   return (
@@ -48,7 +32,7 @@ export default function ProductCard({ id, urlImage, name, price, updateCart }) {
         <button
           className="buttonProduct mx-2"
           type="button"
-          onClick={ () => handleAddToCart('subtract') }
+          onClick={ () => updateQty(quantity.current - 1) }
           data-testid={ `customer_products__button-card-rm-item-${id}` }
         >
           -
@@ -58,14 +42,14 @@ export default function ProductCard({ id, urlImage, name, price, updateCart }) {
           type="number"
           name="quantity"
           min="0"
-          value={ quantity }
+          value={ quantity.current }
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          onChange={ (e) => updateQuantity(e.target.value) }
+          onChange={ (e) => updateQty(e.target.value) }
         />
         <button
           className="buttonProduct mx-2"
           type="button"
-          onClick={ () => handleAddToCart('add') }
+          onClick={ () => updateQty(quantity.current + 1) }
           data-testid={ `customer_products__button-card-add-item--${id}` }
         >
           +

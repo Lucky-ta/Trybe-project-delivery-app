@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 // import { Container, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import NavBarProducts from '../components/NavBarProducts';
 import { Api } from '../service/Api';
 import ProductCard from '../components/ProductCard';
@@ -10,6 +11,8 @@ import AppContext from '../context/App Context';
 function CustomerPage() {
   const { cart, setCart, totalPrice, setTotalPrice } = useContext(AppContext);
   const [products, setProducts] = useState([]);
+
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     const response = await Api.get('/customer/products');
@@ -25,13 +28,14 @@ function CustomerPage() {
   }, [cart, setTotalPrice]);
 
   const updateCartLocalStorage = useCallback(() => {
-    localStorage.setItem('cart', JSON.stringify([...cart]));
+    const filteredCart = cart.filter((item) => item.quantity !== 0);
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
+    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
     calculateTotalPrice();
-  }, [calculateTotalPrice, cart]);
+  }, [cart, totalPrice, calculateTotalPrice]);
 
-  const addToCard = (product, quantity) => {
+  const updateCart = (quantity, product) => {
     const exists = cart.find((item) => item.id === product.id);
-
     if (exists) {
       exists.quantity = quantity;
     } else {
@@ -41,37 +45,15 @@ function CustomerPage() {
         price: product.price,
         quantity,
       };
-      return setCart([...cart, cartProduct]);
+      setCart([...cart, cartProduct]);
     }
-    updateCartLocalStorage();
-  };
-
-  const subtractFromCart = async (product, quantity) => {
-    const exists = cart.find((item) => item.id === product.id);
-    if (!exists) return null;
-    if (exists.quantity === 1) {
-      const newCart = cart.filter((item) => item.id !== product.id);
-      setCart(newCart);
-    } else {
-      exists.quantity = quantity;
-    }
-    updateCartLocalStorage();
-  };
-
-  const updateCart = (operation, quantity, product) => {
-    if (quantity === 0) return null;
-    if (operation === 'add') addToCard(product, quantity);
-    if (operation === 'subtract') subtractFromCart(product, quantity);
+    return updateCartLocalStorage();
   };
 
   useEffect(() => {
+    updateCartLocalStorage();
     fetchProducts();
-  }, []);
-
-  useEffect(() => {
-    updateCartLocalStorage();
-    calculateTotalPrice();
-  }, [cart, updateCartLocalStorage, calculateTotalPrice]);
+  }, [cart, updateCartLocalStorage]);
 
   return (
     <div>
@@ -84,18 +66,27 @@ function CustomerPage() {
               { ...product }
               cart={ cart }
               updateCart={
-                (operation, quantity) => updateCart(operation, quantity, product)
+                (quantity) => updateCart(quantity, product)
               }
             />
           ))}
         </div>
       </div>
       <div className="totalPriceDiv">
-        <p>
-          Total: R$
-          {' '}
-          {totalPrice.toFixed(2).replace('.', ',')}
-        </p>
+        <button
+          data-testid="customer_products__button-cart"
+          type="button"
+          onClick={ () => navigate('/customer/checkout') }
+          disabled={ cart.length === 0 }
+        >
+          <h3
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            Total: R$
+            {' '}
+            {totalPrice.toFixed(2).replace('.', ',')}
+          </h3>
+        </button>
       </div>
     </div>
   );
