@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import login from '../service/loginApi';
+import '../styles/login.css';
 
 export default function FormLogin() {
   const [email, setEmail] = useState('');
@@ -33,8 +34,13 @@ export default function FormLogin() {
     if (postRequest.message) {
       setErrorMessage(postRequest.message);
     } else {
-      localStorage.setItem('token', postRequest.token);
-      localStorage.setItem('userName', postRequest.userData.name);
+      const user = {
+        name: postRequest.userData.name,
+        email: postRequest.userData.email,
+        role: postRequest.userData.role,
+        token: postRequest.token,
+      };
+      localStorage.setItem('user', JSON.stringify(user));
       return navigate('/customer/products');
     }
     console.log(postRequest);
@@ -44,7 +50,7 @@ export default function FormLogin() {
   };
 
   return (
-    <Form onSubmit={ handleSubmit }>
+    <Form onSubmit={ handleSubmit } className="loginCard">
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Login</Form.Label>
         <Form.Control
@@ -55,7 +61,7 @@ export default function FormLogin() {
           value={ email }
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group controlId="formBasicPassword">
         <Form.Label>Senha</Form.Label>
         <Form.Control
           type="password"
@@ -66,20 +72,22 @@ export default function FormLogin() {
         />
         <Button
           variant="primary"
+          className="mx-auto mt-2"
           type="submit"
           data-testid="common_login__button-login"
           disabled={ checkInputs }
         >
           Login
         </Button>
-        <Button
-          variant="primary"
-          data-testid="common_login__button-register"
-          onClick={ () => navigate('/register') }
-        >
-          Ainda não tenho conta
-        </Button>
       </Form.Group>
+      <Button
+        variant="primary"
+        className="mx-auto mt-2"
+        data-testid="common_login__button-register"
+        onClick={ () => navigate('/register') }
+      >
+        Ainda não tenho conta
+      </Button>
       {errorMessage.length !== 0 && (
         <p data-testid="common_login__element-invalid-email">{errorMessage}</p>
       )}
