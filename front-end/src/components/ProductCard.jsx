@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-// import { Button } from 'react-bootstrap';
 
 export default function ProductCard({ id, urlImage, name, price, updateCart }) {
   const quantity = useRef(0);
@@ -16,7 +15,7 @@ export default function ProductCard({ id, urlImage, name, price, updateCart }) {
 
   // TODO: mudar o div para Link para o produto
   return (
-    <div className="productCard">
+    <div className="">
       <p
         data-testid={ `customer_products__element-card-price-${id}` }
       >
@@ -28,7 +27,7 @@ export default function ProductCard({ id, urlImage, name, price, updateCart }) {
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
       <h3 data-testid={ `customer_products__element-card-title-${id}` }>{name}</h3>
-      <div className="d-flex flex-row justify-content-between">
+      <div className="">
         <button
           className="buttonProduct mx-2"
           type="button"
@@ -38,7 +37,7 @@ export default function ProductCard({ id, urlImage, name, price, updateCart }) {
           -
         </button>
         <input
-          className="inputProduct"
+          className=""
           type="number"
           name="quantity"
           min="0"
@@ -47,7 +46,7 @@ export default function ProductCard({ id, urlImage, name, price, updateCart }) {
           onChange={ (e) => updateQty(e.target.value) }
         />
         <button
-          className="buttonProduct mx-2"
+          className="mx-2"
           type="button"
           onClick={ () => updateQty(quantity.current + 1) }
           data-testid={ `customer_products__button-card-add-item--${id}` }

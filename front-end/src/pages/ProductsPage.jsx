@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import NavBarProducts from '../components/NavBarProducts';
 import { Api } from '../service/Api';
 import ProductCard from '../components/ProductCard';
-import '../styles/products.css';
 import AppContext from '../context/App Context';
 
 function CustomerPage() {
@@ -57,8 +56,8 @@ function CustomerPage() {
   return (
     <div>
       <NavBarProducts />
-      <div className="productCardContainerDiv">
-        <div className="productCardContainer">
+      <div className="">
+        <div className="">
           {products.map((product) => (
             <ProductCard
               key={ product.id }
@@ -71,7 +70,7 @@ function CustomerPage() {
           ))}
         </div>
       </div>
-      <div className="totalPriceDiv">
+      <div className="">
         <button
           data-testid="customer_products__button-cart"
           type="button"

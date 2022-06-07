@@ -3,7 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import login from '../service/loginApi';
-import '../styles/login.css';
 
 export default function FormLogin() {
   const [email, setEmail] = useState('');

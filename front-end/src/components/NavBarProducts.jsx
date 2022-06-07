@@ -2,7 +2,6 @@ import React from 'react';
 // import { Navbar, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
-import '../styles/navbar.css';
 
 export default function NavBarProducts() {
   return (
