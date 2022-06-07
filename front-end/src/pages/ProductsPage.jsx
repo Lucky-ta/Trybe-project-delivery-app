@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-// import { Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import NavBarProducts from '../components/NavBarProducts';
 import { Api } from '../service/Api';
