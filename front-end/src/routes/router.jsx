@@ -10,6 +10,7 @@ import ProductsPage from '../pages/ProductsPage';
 
 import LoginPage from '../pages/LoginPage';
 import OrdersPage from '../pages/OrdersPage';
+import CheckoutPage from '../pages/CheckoutPage';
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
         <Route path="/register" element={ <RegisterPage /> } />
         <Route path="/customer/products" element={ <ProductsPage /> } />
         <Route path="/customer/orders" element={ <OrdersPage /> } />
+        <Route path="/customer/checkout" element={ <CheckoutPage /> } />
       </Routes>
     </BrowserRouter>
   );

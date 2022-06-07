@@ -11,4 +11,6 @@ app.use('/', router);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
+app.use('/images', express.static(`${__dirname}/images`));
+
 module.exports = app;
