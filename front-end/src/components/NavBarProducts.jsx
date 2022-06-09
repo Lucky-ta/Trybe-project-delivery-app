@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import { Navbar, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
+import AppContext from '../context/App Context';
 
 export default function NavBarProducts() {
+  const { setCart } = useContext(AppContext);
   return (
     <nav className="navbar">
       <Link
@@ -30,6 +32,8 @@ export default function NavBarProducts() {
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ () => {
           localStorage.removeItem('user');
+          localStorage.removeItem('cart');
+          setCart([]);
         } }
         to="/login"
       >
