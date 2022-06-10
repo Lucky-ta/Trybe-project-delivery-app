@@ -1,6 +1,6 @@
 import React, {
   useCallback,
-  useContext, useEffect, useLayoutEffect, useState } from 'react';
+  useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBarProducts from '../components/NavBarProducts';
 import { Api } from '../service/Api';
@@ -18,18 +18,9 @@ function CustomerPage() {
     setProducts(response.data);
   };
 
-  const calculateTotalPrice = () => {
-    let total = 0;
-    cart.forEach((item) => {
-      total += item.price * item.quantity;
-    });
-    return total;
-  };
-
-  const updateCartLocalStorage = useCallback(() => {
-    const filteredCart = cart.filter((item) => item.quantity !== 0);
-    localStorage.setItem('cart', JSON.stringify(filteredCart));
-  }, [cart]);
+  const calculateTotalPrice = () => cart.reduce(
+    (total, item) => total + (item.price * item.quantity), 0,
+  );
 
   const updateCart = (quantity, product) => {
     const exists = cart.find((item) => item.id === product.id);
@@ -44,8 +35,9 @@ function CustomerPage() {
       };
       cart.push(cartProduct);
     }
-    setCart([...cart]);
-    return updateCartLocalStorage();
+    const filteredCart = cart.filter((item) => item.quantity !== 0);
+    setCart([...filteredCart]);
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
   };
 
   const setCartFromLS = useCallback(() => {
@@ -57,12 +49,8 @@ function CustomerPage() {
     ? cart.find((item) => item.id === product.id).quantity : 0);
 
   useEffect(() => {
-    updateCartLocalStorage();
-    fetchProducts();
-  }, [updateCartLocalStorage]);
-
-  useLayoutEffect(() => {
     setCartFromLS();
+    fetchProducts();
   }, [setCartFromLS]);
 
   return (
@@ -74,9 +62,7 @@ function CustomerPage() {
             <ProductCard
               key={ product.id }
               { ...product }
-              updateCart={
-                (quantity) => updateCart(quantity, product)
-              }
+              updateCart={ (quantity) => updateCart(quantity, product) }
               quantityP={ getQuantityFromCart(product) }
             />
           ))}
