@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './Product.css';
 
 export default function ProductCard(props) {
   const { id, urlImage, name, price, quantityP, updateCart } = props;
