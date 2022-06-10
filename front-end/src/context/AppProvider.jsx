@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import AppContext from './App Context';
+import AppContext from './AppContext';
 
 export default function AppProvider({ children }) {
   const [cart, setCart] = useState([]);

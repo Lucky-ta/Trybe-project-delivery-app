@@ -22,7 +22,9 @@ const options = {
     timezone: 'Z',
   },
   define: {
-    timestamps: false,
+    timestamps: true,
+    createdAt: false,
+    updatedAt: false,
   },
   logging: false,
 };

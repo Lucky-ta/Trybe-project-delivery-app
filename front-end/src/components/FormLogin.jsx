@@ -37,6 +37,7 @@ export default function FormLogin() {
         email: postRequest.userData.email,
         role: postRequest.userData.role,
         token: postRequest.token,
+        id: postRequest.userData.id,
       };
       localStorage.setItem('user', JSON.stringify(user));
       return navigate('/customer/products');

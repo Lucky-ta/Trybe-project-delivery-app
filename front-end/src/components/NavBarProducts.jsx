@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import AppContext from '../context/App Context';
+import AppContext from '../context/AppContext';
 
 export default function NavBarProducts() {
   const { setCart } = useContext(AppContext);

@@ -25,7 +25,7 @@ module.exports = {
         }
       },
       total_price: {
-        type: Sequelize.FLOAT(9, 2),
+        type: Sequelize.DECIMAL(9, 2),
         allowNull: false,
       },
       delivery_address: {
@@ -41,7 +41,7 @@ module.exports = {
       sale_date: {
         type: Sequelize.DATE,
         allowNull: false,
-
+        defaultValue: Sequelize.fn('now'),
       },
       status: {
         type: Sequelize.STRING(50),

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBarProducts from '../components/NavBarProducts';
 import { Api } from '../service/Api';
 import ProductCard from '../components/ProductCard';
-import AppContext from '../context/App Context';
+import AppContext from '../context/AppContext';
 
 function CustomerPage() {
   const { cart, setCart } = useContext(AppContext);
