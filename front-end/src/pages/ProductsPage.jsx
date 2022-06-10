@@ -1,5 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
+import React, {
+  useCallback,
+  useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBarProducts from '../components/NavBarProducts';
 import { Api } from '../service/Api';
@@ -7,7 +8,7 @@ import ProductCard from '../components/ProductCard';
 import AppContext from '../context/App Context';
 
 function CustomerPage() {
-  const { cart, setCart, totalPrice, setTotalPrice } = useContext(AppContext);
+  const { cart, setCart } = useContext(AppContext);
   const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
@@ -17,20 +18,9 @@ function CustomerPage() {
     setProducts(response.data);
   };
 
-  const calculateTotalPrice = useCallback(() => {
-    let total = 0;
-    cart.forEach((item) => {
-      total += item.price * item.quantity;
-    });
-    setTotalPrice(total);
-  }, [cart, setTotalPrice]);
-
-  const updateCartLocalStorage = useCallback(() => {
-    const filteredCart = cart.filter((item) => item.quantity !== 0);
-    localStorage.setItem('cart', JSON.stringify(filteredCart));
-    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
-    calculateTotalPrice();
-  }, [cart, totalPrice, calculateTotalPrice]);
+  const calculateTotalPrice = () => cart.reduce(
+    (total, item) => total + (item.price * item.quantity), 0,
+  );
 
   const updateCart = (quantity, product) => {
     const exists = cart.find((item) => item.id === product.id);
@@ -43,46 +33,54 @@ function CustomerPage() {
         price: product.price,
         quantity,
       };
-      setCart([...cart, cartProduct]);
+      cart.push(cartProduct);
     }
-    return updateCartLocalStorage();
+    const filteredCart = cart.filter((item) => item.quantity !== 0);
+    setCart([...filteredCart]);
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
   };
 
+  const setCartFromLS = useCallback(() => {
+    const cartFromLS = JSON.parse(localStorage.getItem('cart'));
+    if (cartFromLS) setCart(cartFromLS);
+  }, [setCart]);
+
+  const getQuantityFromCart = (product) => (cart.find((item) => item.id === product.id)
+    ? cart.find((item) => item.id === product.id).quantity : 0);
+
   useEffect(() => {
-    updateCartLocalStorage();
+    setCartFromLS();
     fetchProducts();
-  }, [cart, updateCartLocalStorage]);
+  }, [setCartFromLS]);
 
   return (
     <div>
       <NavBarProducts />
-      <div className="">
-        <div className="">
+      <div>
+        <div>
           {products.map((product) => (
             <ProductCard
               key={ product.id }
               { ...product }
-              cart={ cart }
-              updateCart={
-                (quantity) => updateCart(quantity, product)
-              }
+              updateCart={ (quantity) => updateCart(quantity, product) }
+              quantityP={ getQuantityFromCart(product) }
             />
           ))}
         </div>
       </div>
-      <div className="">
+      <div>
         <button
           data-testid="customer_products__button-cart"
           type="button"
           onClick={ () => navigate('/customer/checkout') }
-          disabled={ cart.length === 0 }
+          disabled={ calculateTotalPrice() === 0 }
         >
           <h3
             data-testid="customer_products__checkout-bottom-value"
           >
             Total: R$
             {' '}
-            {totalPrice.toFixed(2).replace('.', ',')}
+            {calculateTotalPrice().toFixed(2).replace('.', ',')}
           </h3>
         </button>
       </div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import register from '../service/registerApi';
-import 'bootstrap/dist/css/bootstrap.css';
 
 export default function FormRegister() {
   const [email, setEmail] = useState('');

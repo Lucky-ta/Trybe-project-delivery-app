@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import RegisterPage from '../pages/RegisterPage';
 import ProductsPage from '../pages/ProductsPage';
-
 import LoginPage from '../pages/LoginPage';
 import OrdersPage from '../pages/OrdersPage';
 import CheckoutPage from '../pages/CheckoutPage';
