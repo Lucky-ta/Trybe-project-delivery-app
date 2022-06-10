@@ -1,7 +1,6 @@
 import React, {
   useCallback,
   useContext, useEffect, useLayoutEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import NavBarProducts from '../components/NavBarProducts';
 import { Api } from '../service/Api';
