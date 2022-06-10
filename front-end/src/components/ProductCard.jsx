@@ -48,7 +48,7 @@ export default function ProductCard(props) {
         <button
           type="button"
           onClick={ () => updateQty(quantity + 1) }
-          data-testid={ `customer_products__button-card-add-item--${id}` }
+          data-testid={ `customer_products__button-card-add-item-${id}` }
         >
           +
         </button>
