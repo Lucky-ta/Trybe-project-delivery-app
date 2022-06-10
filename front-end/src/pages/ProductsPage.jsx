@@ -7,7 +7,7 @@ import { Api } from '../service/Api';
 import ProductCard from '../components/ProductCard';
 import AppContext from '../context/App Context';
 
-function CustomerPage() {
+function ProductsPage() {
   const { cart, setCart } = useContext(AppContext);
   const [products, setProducts] = useState([]);
 
@@ -88,4 +88,4 @@ function CustomerPage() {
   );
 }
 
-export default CustomerPage;
+export default ProductsPage;
