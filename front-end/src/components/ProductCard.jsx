@@ -31,7 +31,6 @@ export default function ProductCard(props) {
       <h3 data-testid={ `customer_products__element-card-title-${id}` }>{name}</h3>
       <div>
         <button
-          className="buttonProduct mx-2"
           type="button"
           onClick={ () => updateQty(quantity - 1) }
           data-testid={ `customer_products__button-card-rm-item-${id}` }

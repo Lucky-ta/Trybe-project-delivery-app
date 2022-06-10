@@ -5,9 +5,8 @@ import AppContext from '../context/App Context';
 export default function NavBarProducts() {
   const { setCart } = useContext(AppContext);
   return (
-    <nav className="">
+    <nav>
       <Link
-        className=""
         data-testid="customer_products__element-navbar-link-products"
         to="/customer/products"
       >
@@ -15,7 +14,6 @@ export default function NavBarProducts() {
 
       </Link>
       <Link
-        className=""
         data-testid="customer_products__element-navbar-link-orders"
         to="/customer/orders"
       >
@@ -26,7 +24,6 @@ export default function NavBarProducts() {
         {JSON.parse(localStorage.getItem('user')).name}
       </h3>
       <Link
-        className=""
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ () => {
           localStorage.removeItem('user');
