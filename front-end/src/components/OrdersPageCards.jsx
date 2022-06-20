@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-function OrdersPageCards({ saleData }) {
+function OrdersPageCards({ saleData, date }) {
   return (
     <div>
       <span data-testid={ `customer_orders__element-order-id-${saleData.id}` }>
@@ -13,11 +13,11 @@ function OrdersPageCards({ saleData }) {
         {saleData.status}
       </h3>
       <span data-testid={ `customer_orders__element-order-date-${saleData.id}` }>
-        {saleData.saleDate}
+        {date}
       </span>
-      <span data-testid={ `customer_orders__element-card-price-${saleData.id}` }>
-        {saleData.totalPrice}
-      </span>
+      <p data-testid={ `customer_orders__element-card-price-${saleData.id}` }>
+        {saleData.totalPrice.replace('.', ',')}
+      </p>
     </div>
   );
 }
@@ -29,6 +29,7 @@ OrdersPageCards.propTypes = {
     status: PropTypes.string,
     totalPrice: PropTypes.string,
   }).isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 export default OrdersPageCards;
