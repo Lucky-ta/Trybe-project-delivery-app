@@ -1,7 +1,7 @@
 const express = require('express');
 const { userLogin, userRegister } = require('../controllers/UserController');
 const { getProducts } = require('../controllers/ProductController');
-const { postSallesById } = require('../controllers/SallesController');
+const { postSalles, getSalesByUserId } = require('../controllers/SallesController');
 const jwtUtils = require('../utils/jwt');
 
 const router = express.Router();
@@ -15,7 +15,9 @@ router.get(
   getProducts,
 );
 
-router.post('/customer/orders', jwtUtils.verifyToken, postSallesById);
+router.post('/customer/orders', jwtUtils.verifyToken, postSalles);
+
+router.get('/customer/orders', jwtUtils.verifyToken, getSalesByUserId);
 
 module.exports = {
     router,

@@ -4,7 +4,7 @@ import CheckoutCard from '../components/CheckoutCard';
 import DetailsAndAddress from '../components/DetailsAndAddress';
 import NavBarProducts from '../components/NavBarProducts';
 import AppContext from '../context/AppContext';
-import postSale from '../service/salleApi';
+import { postSale } from '../service/salleApi';
 
 function CheckoutPage() {
   const user = JSON.parse(localStorage.getItem('user'));

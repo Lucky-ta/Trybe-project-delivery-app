@@ -7,4 +7,11 @@ const postSale = async (token, sale) => {
   return result.data;
 };
 
-export default postSale;
+const getSalles = async (token) => {
+  const result = await Api.get('/customer/orders', {
+    headers: { Authorization: token },
+  });
+  return result.data;
+};
+
+export { postSale, getSalles };
