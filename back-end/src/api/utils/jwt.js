@@ -15,7 +15,7 @@ const verifyToken = async (req, res, next) => {
   }
   try {
     const data = jwt.verify(authorization, JWT_SECRET);
-    const { id } = data;
+    const { id } = data.userData;
     req.body.id = id;
     next();
   } catch (error) {

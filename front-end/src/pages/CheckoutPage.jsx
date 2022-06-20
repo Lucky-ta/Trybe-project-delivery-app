@@ -4,7 +4,7 @@ import CheckoutCard from '../components/CheckoutCard';
 import DetailsAndAddress from '../components/DetailsAndAddress';
 import NavBarProducts from '../components/NavBarProducts';
 import AppContext from '../context/AppContext';
-import postSale from '../service/salleApi';
+import { postSale } from '../service/salleApi';
 
 function CheckoutPage() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -12,15 +12,14 @@ function CheckoutPage() {
   const [body, setBody] = useState({ quantity: [], productId: [] });
   const navigate = useNavigate();
 
-  const calculateTotalPrice = () => cart.reduce(
-    (total, item) => total + (item.price * item.quantity), 0,
-  );
+  const calculateTotalPrice = () => cart
+    .reduce((total, item) => total + item.price * item.quantity, 0);
 
   const finishSale = async () => {
     console.log(cart);
-    setBody(body.totalPrice = Number(calculateTotalPrice().toFixed(2)));
-    setBody(body.status = 'Pendente');
-    setBody(body.userId = user.id);
+    setBody((body.totalPrice = Number(calculateTotalPrice().toFixed(2))));
+    setBody((body.status = 'Pendente'));
+    setBody((body.userId = user.id));
     cart.forEach((p) => {
       body.quantity.push(p.quantity);
       body.productId.push(p.id);
@@ -39,14 +38,10 @@ function CheckoutPage() {
     <div>
       <h1>Checkout Page</h1>
       <NavBarProducts />
-      {cart.map((p, index) => (<CheckoutCard
-        product={ p }
-        key={ index }
-        index={ index }
-      />))}
-      <p
-        data-testid="customer_checkout__element-order-total-price"
-      >
+      {cart.map((p, index) => (
+        <CheckoutCard product={ p } key={ index } index={ index } />
+      ))}
+      <p data-testid="customer_checkout__element-order-total-price">
         {calculateTotalPrice().toFixed(2).replace('.', ',')}
       </p>
       <DetailsAndAddress finishSale={ finishSale } body={ body } />

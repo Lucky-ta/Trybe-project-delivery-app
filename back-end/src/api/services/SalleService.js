@@ -3,7 +3,6 @@ const { SaleProducts } = require('../../database/models');
 
 const setNewSalle = async (body) => {
   const result = await Sales.create(body);
-
   if (result) {
     const { id } = result.dataValues;
     const { productId, quantity } = body;
@@ -17,8 +16,23 @@ const setNewSalle = async (body) => {
     });
 
     return { status: 201, data: result };
-  } 
+  }
   return { status: 404, data: 'deu ruim' };
 };
 
-module.exports = { setNewSalle };
+const getSalesById = async (id) => {
+  const query = await Sales.findAll({
+    where: {
+      userId: id,
+    },
+  });
+  if (!query) {
+    return {
+      status: 400,
+      data: { message: 'Erro' },
+    };
+  }
+  return { status: 200, data: query };
+};
+
+module.exports = { setNewSalle, getSalesById };

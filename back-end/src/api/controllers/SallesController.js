@@ -1,12 +1,23 @@
-const { setNewSalle } = require('../services/SalleService');
+const { setNewSalle, getSalesById } = require('../services/SalleService');
 
-const postSallesById = async (req, res) => {
+const postSalles = async (req, res) => {
+  // console.log(req.body);
   try {
-    const result = await setNewSalle(req.body);
+    const { id: bodyId, ...bodyWithoutId } = req.body;
+    console.log(bodyWithoutId);
+    const result = await setNewSalle(bodyWithoutId);
     return res.status(result.status).json(result.data);
   } catch (error) {
     return res.status(500).json(error.message);
   }
 };
 
-module.exports = { postSallesById };
+const getSalesByUserId = async (req, res) => {
+  const { id } = req.body;
+  console.log(id);
+  const result = await getSalesById(id);
+
+  res.status(result.status).json(result.data);
+};
+
+module.exports = { postSalles, getSalesByUserId };
