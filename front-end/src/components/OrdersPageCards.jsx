@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function OrdersPageCards({ saleData, date }) {
+  const navigate = useNavigate();
+  const handleCart = () => {
+    navigate(`/customer/orders/${saleData.id}`);
+  };
+
   return (
-    <div>
+    <div onClick={ handleCart } onKeyDown role="button" tabIndex={ 0 }>
       <span data-testid={ `customer_orders__element-order-id-${saleData.id}` }>
         {saleData.id}
       </span>

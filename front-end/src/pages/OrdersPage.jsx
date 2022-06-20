@@ -7,6 +7,7 @@ function OrdersPage() {
   const storageUser = JSON.parse(localStorage.getItem('user'));
   const [salles, SetSalles] = useState([]);
 
+  // https://blog.betrybe.com/javascript/javascript-date-format/#4
   function adicionaZero(numero) {
     const FUNC_NUMBER = 9;
     if (numero <= FUNC_NUMBER) return `0${numero}`;
@@ -25,7 +26,8 @@ function OrdersPage() {
     <div>
       <NavBarProducts />
       {salles.map((saleData, index) => {
-        const date = new Date(saleData.saleDate);
+        // https://blog.betrybe.com/javascript/javascript-date-format/#4
+        const date = new Date(saleData.saleDate);git
         const formatDate = `${adicionaZero(date.getDate())}/${
           adicionaZero(date.getMonth() + 1)
         }/${date.getFullYear()}`;
