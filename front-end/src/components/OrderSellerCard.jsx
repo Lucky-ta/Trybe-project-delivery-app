@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getOrderSalles } from '../service/salleApi';
 import formatDate from '../utils/dateFunction';
 
 function OrderSellerCard({ order }) {
   const navigate = useNavigate();
 
-  const redirectOrderDetails = () => navigate(`/seller/orders/${order.id}`);
+  const redirectOrderDetails = async () => {
+    const result = await getOrderSalles(order.id);
+    localStorage.setItem('orderSalles', JSON.stringify(result));
+    return navigate(`/seller/orders/${order.id}`);
+  };
 
   return (
     <div onClick={ redirectOrderDetails } onKeyDown role="button" tabIndex={ 0 }>
