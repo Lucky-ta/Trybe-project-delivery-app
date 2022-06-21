@@ -10,6 +10,9 @@ import ProductsPage from '../pages/ProductsPage';
 import LoginPage from '../pages/LoginPage';
 import OrdersPage from '../pages/OrdersPage';
 import CheckoutPage from '../pages/CheckoutPage';
+import CustomerOrderDetails from '../pages/CustomerOrderDetails';
+import SellerOrdersPage from '../pages/SellerOrdersPage';
+import SellerOrdersDetailsPage from '../pages/SellerOrdersDetailsPage';
 
 function Router() {
   return (
@@ -21,6 +24,9 @@ function Router() {
         <Route path="/customer/products" element={ <ProductsPage /> } />
         <Route path="/customer/orders" element={ <OrdersPage /> } />
         <Route path="/customer/checkout" element={ <CheckoutPage /> } />
+        <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
+        <Route path="/seller/orders" element={ <SellerOrdersPage /> } />
+        <Route path="/seller/orders/:id" element={ <SellerOrdersDetailsPage /> } />
       </Routes>
     </BrowserRouter>
   );

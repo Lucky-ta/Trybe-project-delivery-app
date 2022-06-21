@@ -4,7 +4,7 @@ import CheckoutCard from '../components/CheckoutCard';
 import DetailsAndAddress from '../components/DetailsAndAddress';
 import NavBarProducts from '../components/NavBarProducts';
 import AppContext from '../context/AppContext';
-import { postSale } from '../service/salleApi';
+import { getSalles, postSale } from '../service/salleApi';
 
 function CheckoutPage() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -16,7 +16,6 @@ function CheckoutPage() {
     .reduce((total, item) => total + item.price * item.quantity, 0);
 
   const finishSale = async () => {
-    console.log(cart);
     setBody((body.totalPrice = Number(calculateTotalPrice().toFixed(2))));
     setBody((body.status = 'Pendente'));
     setBody((body.userId = user.id));
@@ -24,8 +23,9 @@ function CheckoutPage() {
       body.quantity.push(p.quantity);
       body.productId.push(p.id);
     });
-    console.log(body);
     const response = await postSale(user.token, body);
+    const result = await getSalles(user.token);
+    localStorage.setItem('salles', JSON.stringify(result));
     navigate(`/customer/orders/${response.id}`);
   };
 

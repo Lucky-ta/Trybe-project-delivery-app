@@ -14,4 +14,9 @@ const getSalles = async (token) => {
   return result.data;
 };
 
-export { postSale, getSalles };
+const getOrderSalles = async (id) => {
+  const result = await Api.get(`/seller/orders/${id}`);
+  return result.data;
+};
+
+export { postSale, getSalles, getOrderSalles };
