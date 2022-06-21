@@ -3,16 +3,19 @@ import { Link } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 export default function NavBarProducts() {
+  const currentPath = window.location.pathname;
   const { setCart } = useContext(AppContext);
   return (
     <nav>
-      <Link
-        data-testid="customer_products__element-navbar-link-products"
-        to="/customer/products"
-      >
-        Products
+      { currentPath !== '/seller/orders' && (
+        <Link
+          data-testid="customer_products__element-navbar-link-products"
+          to="/customer/products"
+        >
+          Products
 
-      </Link>
+        </Link>
+      )}
       <Link
         data-testid="customer_products__element-navbar-link-orders"
         to="/customer/orders"

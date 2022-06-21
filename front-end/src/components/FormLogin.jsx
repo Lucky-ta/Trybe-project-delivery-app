@@ -40,6 +40,7 @@ export default function FormLogin() {
         id: postRequest.userData.id,
       };
       localStorage.setItem('user', JSON.stringify(user));
+      if (user.role === 'seller') return navigate('/seller/orders');
       return navigate('/customer/products');
     }
     console.log(postRequest);
