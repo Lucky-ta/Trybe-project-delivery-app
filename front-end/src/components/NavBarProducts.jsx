@@ -7,7 +7,7 @@ export default function NavBarProducts() {
   const { setCart } = useContext(AppContext);
   return (
     <nav>
-      { currentPath !== '/seller/orders' && (
+      { !currentPath.includes('/seller/orders/') && (
         <Link
           data-testid="customer_products__element-navbar-link-products"
           to="/customer/products"

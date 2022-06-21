@@ -1,4 +1,4 @@
-const { setNewSalle, getSalesById } = require('../services/SalleService');
+const { setNewSalle, getSalesById, filterSellerOrdersById } = require('../services/SalleService');
 
 const postSalles = async (req, res) => {
   // console.log(req.body);
@@ -20,4 +20,11 @@ const getSalesByUserId = async (req, res) => {
   res.status(result.status).json(result.data);
 };
 
-module.exports = { postSalles, getSalesByUserId };
+const getSellerOrdersById = async (req, res) => {
+  const { id } = req.params;
+  const numberId = Number(id);
+  const result = await filterSellerOrdersById(numberId);
+  return res.status(result.status).json(result.data);
+};
+
+module.exports = { postSalles, getSalesByUserId, getSellerOrdersById };
