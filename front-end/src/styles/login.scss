@@ -1,0 +1,9 @@
+@import './main.scss';
+
+.loginCard {
+  @include centerDiv();
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem;
+}

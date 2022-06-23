@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+$dark-green: #036B52;
+$green: #2FC18C;
+$purple: #421981;
+$blue: #056CF9;
+
+@mixin centerDiv {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button-primary {
+  background-color: $dark-green;
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  font-size: 1.2rem;
+}
+

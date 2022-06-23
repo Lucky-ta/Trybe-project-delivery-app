@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import login from '../service/loginApi';
+import '../styles/main.scss';
+import '../styles/login.scss';
 
 export default function FormLogin() {
   const [email, setEmail] = useState('');
@@ -55,6 +57,7 @@ export default function FormLogin() {
         <Form.Label>Login</Form.Label>
         <Form.Control
           type="email"
+          // className="input"
           placeholder="Enter email"
           data-testid="common_login__input-email"
           onChange={ (e) => { setEmail(e.target.value); } }
@@ -72,7 +75,7 @@ export default function FormLogin() {
         />
         <Button
           variant="primary"
-          className="mx-auto mt-2"
+          className="button-primary"
           type="submit"
           data-testid="common_login__button-login"
           disabled={ checkInputs }
