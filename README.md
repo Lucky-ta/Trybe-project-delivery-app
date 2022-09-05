@@ -2,10 +2,10 @@
 
 ## _Créditos:_
   Todo o projeto foi feito em um grupo de mais 4 integrantes, sendo eles: 
-  Marcelo: https://github.com/dsmarcelo
-  Arthur: https://github.com/ArthurMCS
-  Flávio: https://github.com/fpdsjr
-  Luan: https://github.com/LuanRodriguesep
+  - Marcelo: https://github.com/dsmarcelo
+  - Arthur: https://github.com/ArthurMCS
+  - Flávio: https://github.com/fpdsjr
+  - Luan: https://github.com/LuanRodriguesep
 
 ## _Descrição:_
   Este é um projeto de delivery, onde você pode selecionar as suas bebidas, adiciona-las
